@@ -164,23 +164,3 @@ class CountryServices {
 
     }
 }
-const countryServices = new CountryServices();
-
-let x=[5]
-countryServices.deleteFromFirst(x)
-console.log(x);
-// console.log(countryServices.deleteFromEnd(countryList));
-// console.log(countryServices.sortCountryZToA(countryList));
-// console.log(countryServices.searchByNameInclude(countryList,""));
-// console.log(countryServices.searchByFullName(countryList,"Palestine"));
-// countryServices.addToFirst(countryList,"AAAAaaaa")
-// countryServices.addToEnd(countryList,"zzzzzzzz");
-// //countryServices.deleteFromFirst(countryList);
-// ///countryServices.deleteFromEnd(countryList);
-// //console.log(countryServices.deleteByName(countryList,"Palestine"));
-// console.log(countryServices.arrayLength(countryList));
-// //console.log(countryServices.sortCountryZToA(countryList));
-// console.log(countryServices.checkElementExists(countryList,"Palestine"));
-// console.log(countryServices.getElementIndex(countryList,"Palestine"));
- console.log(countryServices.shunkArray(countryList,"fase"));
- //console.log(countryServices.joinArrays(countryList));
