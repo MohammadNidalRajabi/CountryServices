@@ -1,10 +1,10 @@
 import { countryList } from "./country.mjs";
 
 class CountryServices {
-
-     sortCountryAToZ = (array) => {
+    //this mehtod for sort country Asc
+    sortCountryAToZ = (array) => {
         if(Array.isArray(array) && array.length > 0) {
-            array.sort();
+            array.sort(function(a, b){return a?.countryName.localeCompare(b?.countryName)});
             return array;
         } else {
            return "please enter vaild array.";
@@ -12,7 +12,8 @@ class CountryServices {
         
     }
 
-     sortCountryZToA = (array) => {
+    //this mehtod for sort country dec
+    sortCountryZToA = (array) => {
         if(Array.isArray(array) && array.length > 0) {
             this.sortCountryAToZ(array).reverse();
             return array;
@@ -21,11 +22,12 @@ class CountryServices {
         }
     }
 
-     searchByNameInclude = (array, name) => {
+    //this mehtod for search country include set of chracter
+    searchByNameInclude = (array, name) => {
         if(Array.isArray(array) && array.length > 0 && typeof name === 'string') {
-            const country = array?.filter((elment) => elment.toLowerCase().includes(name.toLowerCase()));
+            const country = array?.filter((element) => element?.countryName.toLowerCase().includes(name.toLowerCase()));
             
-            if(country.length > 0) {
+            if(country) {
                 return country;
             }  else {
                 return "not found country.";
@@ -34,38 +36,56 @@ class CountryServices {
             return "please enter vaild array or country name.";
         }
     }
-
-     searchByFullName = (array, name) => {
+    
+    //this mehtod for search country using full name
+    searchByFullName = (array, name) => {
         if(Array.isArray(array) && array.length > 0 && typeof name === 'string') {
-            const country = array?.find((elment) => elment.toLowerCase() === (name.toLowerCase()));
-
-            if(country.length > 0) {
+            const country = array?.find((element) => element?.countryName.toLowerCase() === name.toLowerCase());
+            if(country) {
                 return country;
-            }  else {
-                return "not found country.";
+            } else {
+               return "not found country.";
             }
         } else {
             return "please enter vaild array or country name.";
         }
     }
 
-     addToFirst = (array, name) => {
-        if(Array.isArray(array) && array.length > 0 && typeof name === 'string') {
-            array.unshift(name);
+    //this mehtod for add new country in first for countryList
+    addToFirst = (array, name, cities,numberOfPopulation) => {
+        let objectCountry;
+        if(Array.isArray(array) && array.length > 0 && typeof name === 'string' && Array.isArray(cities) && typeof numberOfPopulation ==='number' && numberOfPopulation>0) {
+            objectCountry = {
+                "id": array?.length + 1,
+                "countryName": name,
+                "numberOfPopulation": numberOfPopulation,
+                 "cities": cities
+              };
+            array.unshift(objectCountry);
         } else {
-           return "please enter vaild array or country name.";
+           return "please enter vaild array or country name or numberOfPopulation.";
         }
     }
 
-     addToEnd = (array, name) => {
-        if(Array.isArray(array) && array.length > 0 && typeof name === 'string') {
-            array.push(name);
+    //this mehtod for add new country from end in countryList
+    addToEnd = (array, name,cities,numberOfPopulation) => {
+        let objectCountry;
+
+        if(Array.isArray(array) && array.length > 0 && typeof name === 'string' && Array.isArray(cities) && typeof numberOfPopulation ==='number' && numberOfPopulation>0) {
+            objectCountry = {
+                "id": array?.length + 1,
+                "countryName": name,
+                "numberOfPopulation": numberOfPopulation,
+                 "cities": cities
+              };
+            array.push(objectCountry);
         } else {
-           return "please enter vaild array or country name.";
+            return "please enter vaild array or country name or numberOfPopulation.";
         }
     }
 
-     deleteFromFirst = (array) => {
+    //this mehtod for delete country from first in countryList
+    deleteFromFirst = (array) => {
         if(Array.isArray(array) && array.length > 0 ) {
             array.shift();
         } else {
@@ -73,6 +93,7 @@ class CountryServices {
         }
     }
 
+     //this mehtod for delete country from end in countryList
      deleteFromEnd = (array) => {
         if(Array.isArray(array) && array.length > 0 ) {
             array.pop();
@@ -81,13 +102,14 @@ class CountryServices {
         }
     }
 
+     //this mehtod for delete country using full name from countryList
      deleteByName = (array, name) => {
-        let  countryIndex =-1;
+        let  countryIndex = -1;
 
         if(Array.isArray(array) && array.length > 0 && typeof name === 'string') {
 
-            array?.map((elment,index) => {
-                if(elment.toLowerCase() === (name.toLowerCase())) {
+            array?.map((element,index) => {
+                if(element?.countryName.toLowerCase() === name.toLowerCase()) {
                     countryIndex = index;
                 }
             });
@@ -103,6 +125,7 @@ class CountryServices {
         }
     }
 
+     //this mehtod for shunk country from countryList 
      shunkArray = (array,shunkCount) => {
         let shunkLingth  = 0;
         let result;
@@ -119,8 +142,9 @@ class CountryServices {
             return("please enter vaild array or shunkCount more then 1 and less then array size.");
         }
     }   
-
-     joinArrays = (...array) => {
+    
+    //this mehtod for join shunk country from and return as array 
+    joinArrays = (...array) => {
         let result = [];
 
         array.forEach(element => {
@@ -131,7 +155,8 @@ class CountryServices {
         return result;
     }
 
-     arrayLength = (array) => {
+    //this mehtod return array length 
+    arrayLength = (array) => {
         if(Array.isArray(array)) {
             return array.length;
         } else {
@@ -139,10 +164,19 @@ class CountryServices {
         }
     }
 
-     getElementIndex = (array, name) => {
+    //this mehtod for getElementIndex for country
+    getElementIndex = (array, name) => {
+        let countryIndex =-1;
+
         if(Array.isArray(array) && array.length > 0 && typeof name === 'string') {
-            if(array.indexOf(name) >= 0) {
-                return array.indexOf(name);
+
+             array?.map((element,index) => {
+                if(element?.countryName.toLowerCase() === name.toLowerCase()) {
+                    return countryIndex = index;
+                }
+            });
+            if(countryIndex >= 0) {
+                return countryIndex;
             } else {
                 return "not found country";
             }
@@ -151,16 +185,90 @@ class CountryServices {
         }
     }
 
-     checkElementExists = (array, name) => {
+    //this mehtod for checkElementExists for country 
+    checkElementExists = (array, name) => {
+        let isExists = false;
+
         if(Array.isArray(array) && array.length > 0 && typeof name === 'string') {
-            if(array.indexOf(name) >= 0) {
-                return true;
-            } else {
-                return false;
-            }
+
+             array?.find((element) =>{
+                if(element?.countryName.toLowerCase() === name.toLowerCase()) {
+                    isExists = true;
+                }
+             });
+            return isExists;
         } else {
             console.log("please enter vaild array or country name.");
         }
+    }
 
+    //this mehtod for add citites for country 
+    addCitiesForCountry = (country,cities) => {
+        if(Array.isArray(cities) && cities.length > 0 && typeof country === 'object') {
+            country.cities = [...country.cities,...cities];
+            return country;
+        } else {
+            return "please enter vaild country or cityName name.";
+        }
+    }
+
+    //this mehtod for delete city for country 
+    deleteCityForCountry = (country, cityName) => {
+        let targetCity;
+
+        if(typeof cityName === 'string' && typeof country === 'object') {
+            targetCity = country.cities.indexOf(cityName);
+            country.cities.splice(targetCity,1);
+            return "delete done.";
+        } else {
+            "please enter vaild country or cityName name.";
+        }
+    }
+
+    //this mehtod for edit city for country 
+    editCityForCountry = (country,cityName,newCityName) => {
+        let targetCity;
+
+        if(typeof cityName === 'string' && typeof newCityName === 'string' && typeof country === 'object') {
+            targetCity = country.cities.indexOf(cityName);
+            country.cities[targetCity] = newCityName;
+            return "edit done.";
+        } else {
+            "please enter vaild country or cityName name or new city name.";
+        }
+    }
+
+    //this mehtod for return list of citites for country 
+    listOfCitiesForCountry = (country) => {
+        if(typeof country === 'object') {
+            return  country.cities;
+        } else {
+            "please enter vaild country or cityName name.";
+        }
+    }
+
+    //this mehtod for search for city in country 
+    searchOfCitiesForCountry = (country,cityName) => {
+        if(typeof country === 'object' && typeof cityName === 'string') {
+            const result = country?.cities?.filter((element) => element?.toLowerCase().includes(cityName.toLowerCase()));
+            
+            if(result) {
+                return result;
+            }  else {
+                return "not found cities";
+            }
+        } else {
+            return "please enter vaild country or cityName name.";
+        }
     }
 }
+
+const countryServices = new CountryServices();
+console.log(countryServices.addCitiesForCountry(countryServices.searchByFullName(countryList,"Afghanistan"),["7ara t7ta"]));
+console.log(countryServices.searchByFullName(countryList,"Afghanistan"));
+countryServices.deleteCityForCountry(countryServices.searchByFullName(countryList,"Afghanistan"),"Hebron");
+console.log(countryServices.searchByFullName(countryList,"Afghanistan"));
+countryServices.editCityForCountry(countryServices.searchByFullName(countryList,"Afghanistan"),"7ara t7ta","Al 7ara al t7ta");
+console.log(countryServices.searchByFullName(countryList,"Afghanistan"));
+console.log(countryServices.listOfCitiesForCountry(countryServices.searchByFullName(countryList,"Afghanistan")));
+console.log(countryServices.searchOfCitiesForCountry(countryServices.searchByFullName(countryList,"Afdasdanistan"),"ga"));
