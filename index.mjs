@@ -263,12 +263,3 @@ class CountryServices {
     }
 }
 
-const countryServices = new CountryServices();
-console.log(countryServices.addCitiesForCountry(countryServices.searchByFullName(countryList,"Afghanistan"),["7ara t7ta"]));
-console.log(countryServices.searchByFullName(countryList,"Afghanistan"));
-countryServices.deleteCityForCountry(countryServices.searchByFullName(countryList,"Afghanistan"),"Hebron");
-console.log(countryServices.searchByFullName(countryList,"Afghanistan"));
-countryServices.editCityForCountry(countryServices.searchByFullName(countryList,"Afghanistan"),"7ara t7ta","Al 7ara al t7ta");
-console.log(countryServices.searchByFullName(countryList,"Afghanistan"));
-console.log(countryServices.listOfCitiesForCountry(countryServices.searchByFullName(countryList,"Afghanistan")));
-console.log(countryServices.searchOfCitiesForCountry(countryServices.searchByFullName(countryList,"Afdasdanistan"),"ga"));
