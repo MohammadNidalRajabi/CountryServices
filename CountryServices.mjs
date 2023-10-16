@@ -1,10 +1,7 @@
-import { countryList } from "./countryData.mjs";
-import { Country } from "./country.mjs";
-import { City } from "./city.mjs";
-import { Area } from "./area.mjs";
 
-class CountryServices {
-    // this mehtod for sort country Asc
+
+export class CountryServices {
+    // this method for sort country Asc
     sortCountryAToZ = (array) => {
         if (Array.isArray(array) && array.length > 0) {
             array.sort(function(a, b){return a?.countryName.localeCompare(b?.countryName)});
@@ -14,7 +11,7 @@ class CountryServices {
         }
     }
 
-    // this mehtod for sort country dec
+    // this method for sort country Desc
     sortCountryZToA = (array) => {
         if (Array.isArray(array) && array.length > 0) {
             this.sortCountryAToZ(array).reverse();
@@ -24,7 +21,7 @@ class CountryServices {
         }
     }
 
-    //this mehtod for search country include set of chracter
+    // this method for search country include set of chracter
     searchByNameInclude = (array, name) => {
         if (Array.isArray(array) && array.length > 0 && typeof name === 'string') {
             const country = array?.filter((element) => element?.countryName.toLowerCase().includes(name.toLowerCase()));
@@ -39,7 +36,7 @@ class CountryServices {
         }
     }
     
-    //this mehtod for search country using full name
+    // this method for search country using full name
     searchByFullName = (array, name) => {
         if (Array.isArray(array) && array.length > 0 && typeof name === 'string') {
             const country = array?.find((element) => element?.countryName.toLowerCase() === name.toLowerCase());
@@ -53,7 +50,7 @@ class CountryServices {
         }
     }
 
-    //this mehtod for add new country in first for countryList
+    // this method for add new country in first for countryList
     addToFirst = (array, name, cities,numberOfPopulation) => {
         let objectCountry;
         if (Array.isArray(array) && array.length > 0 && typeof name === 'string' && Array.isArray(cities) && typeof numberOfPopulation ==='number' && numberOfPopulation>0) {
@@ -64,7 +61,7 @@ class CountryServices {
         }
     }
 
-    // this mehtod for add new country from end in countryList
+    // this method for add new country from end in countryList
     addToEnd = (array, name,cities,numberOfPopulation) => {
         let objectCountry;
 
@@ -76,7 +73,7 @@ class CountryServices {
         }
     }
 
-    //this mehtod for delete country from first in countryList
+    // this method for delete country from first in countryList
     deleteFromFirst = (array) => {
         if (Array.isArray(array) && array.length > 0 ) {
             array.shift();
@@ -85,7 +82,7 @@ class CountryServices {
         }
     }
 
-     //this mehtod for delete country from end in countryList
+     // this method for delete country from end in countryList
      deleteFromEnd = (array) => {
         if (Array.isArray(array) && array.length > 0 ) {
             array.pop();
@@ -94,7 +91,7 @@ class CountryServices {
         }
     }
 
-     //this mehtod for delete country using full name from countryList
+     // this method for delete country using full name from countryList
      deleteByName = (array, name) => {
         let  countryIndex = -1;
 
@@ -117,7 +114,7 @@ class CountryServices {
         }
     }
 
-     //this mehtod for shunk country from countryList 
+     // this method for shunk country from countryList 
      shunkArray = (array,shunkCount) => {
         let shunkLingth  = 0;
         let result;
@@ -135,7 +132,7 @@ class CountryServices {
         }
     }   
     
-    //this mehtod for join shunk country from and return as array 
+    // this method for join shunk country from and return as array 
     joinArrays = (...array) => {
         let result = [];
 
@@ -147,7 +144,7 @@ class CountryServices {
         return result;
     }
 
-    //this mehtod return array length 
+    // this method return array length 
     arrayLength = (array) => {
         if (Array.isArray(array)) {
             return array.length;
@@ -156,7 +153,7 @@ class CountryServices {
         }
     }
 
-    //this mehtod for getElementIndex for country
+    // this method for getElementIndex for country
     getElementIndex = (array, name) => {
         let countryIndex =-1;
 
@@ -177,7 +174,7 @@ class CountryServices {
         }
     }
 
-    //this mehtod for checkElementExists for country 
+    // this method for checkElementExists for country 
     checkElementExists = (array, name) => {
         let isExists = false;
 
@@ -194,8 +191,8 @@ class CountryServices {
         }
     }
 
-    //this mehtod for add citites of object city for country 
-    addCitiesForCountry = (country,cities) => {
+    // this method for add citites of object city for country 
+    addCities = (country,cities) => {
         if (Array.isArray(cities) && cities.length > 0 && typeof country === 'object') {
             country.cities = [...country.cities,...cities];
             return country;
@@ -204,8 +201,8 @@ class CountryServices {
         }
     }
 
-    //this mehtod for delete city for country 
-    deleteCityForCountry = (country, cityName) => {
+    // this method for delete city for country 
+    deleteCity = (country, cityName) => {
         let targetCity;
 
         if (typeof cityName === 'string' && typeof country === 'object') {
@@ -223,8 +220,8 @@ class CountryServices {
         }
     }
 
-    //this mehtod for edit city for country 
-    editCityForCountry = (country,cityName,newCity) => {
+    // this method for edit city for country 
+    editCity = (country,cityName,newCity) => {
         let targetCity = -1 ;
 
         if (typeof cityName === 'string' && typeof newCity === 'object' && typeof country === 'object') {
@@ -242,8 +239,8 @@ class CountryServices {
         }
     }
 
-    //this mehtod for return list of citites for country 
-    listOfCitiesForCountry = (country) => {
+    // this method for return list of citites for country 
+    citiesList = (country) => {
         if (typeof country === 'object') {
             return  country.cities;
         } else {
@@ -251,8 +248,8 @@ class CountryServices {
         }
     }
 
-    //this mehtod for search for city in country 
-    searchOfCitiesForCountry = (country,cityName) => {
+    // this method for search for city in country 
+    searchOfCities = (country,cityName) => {
         let result;
 
         if (typeof country === 'object' && typeof cityName === 'string') {
@@ -260,7 +257,7 @@ class CountryServices {
             
             if (result) {
                 return result;
-            }  else {
+            } else {
                 return "not found cities";
             }
         } else {
@@ -268,22 +265,3 @@ class CountryServices {
         }
     }
 }
-
-// const countryServices = new CountryServices();
-// const area = new Area("A Long",15.123123,16.555);
-// console.log(area);
-// const city = new City("AZZZZ",[area]);
-// const city2 = new City("ABBBB",[area]);
-// const city3 = new City("7araa",[area]);
-// console.log(city);
-// const country = new Country("Haven",100000000,[city,city2]);
-// console.log(country);
-
-// const countryy = countryServices.searchByFullName(countryList,"Afghanistan");
-// countryServices.addCitiesForCountry(countryy,[city]);
-// //countryServices.deleteCityForCountry(country,"ABBBB");
-// console.log(countryy);
-// countryServices.editCityForCountry(countryy,"AZZZZ",city3);
-// console.log(countryServices.listOfCitiesForCountry(countryy));
-// console.log(countryServices.searchOfCitiesForCountry(countryy,"AB"));
-// console.log(countryy);
